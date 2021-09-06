@@ -10,11 +10,12 @@ const app = express();
 
 app.use(morgan('tiny'));
 app.use(express.static(path.join(__dirname, '/public/')));
+app.set('views', "./src/views");
+app.set('view engine', 'ejs');
 
 app.get('/', (req, res) => {
-    res.send("hello from my app");
+    res.render("index", { title: 'globomantics', data: ['a', 'b', 'c'] });
 })
-
 
 app.listen(PORT, () => {
     debug(`listening on port ${chalk.white(PORT)}`);
