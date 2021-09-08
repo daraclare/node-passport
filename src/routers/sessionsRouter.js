@@ -13,7 +13,6 @@ sessionsRouter.route('/').get((req, res) => {
         let client;
         try {
             client = await MongoClient.connect(url);
-            console.log("client", client);
             debug('Connected to the Mongo DB');
             const db = client.db(dbName);
             const sessions = await db.collection('sessions').find().toArray();
@@ -35,7 +34,6 @@ sessionsRouter.route('/:id').get((req, res) => {
         let client;
         try {
             client = await MongoClient.connect(url);
-            console.log("client", client);
             debug('Connected to the Mongo DB');
             const db = client.db(dbName);
             const session = await db.collection('sessions').findOne({ _id: new ObjectId(id) });
