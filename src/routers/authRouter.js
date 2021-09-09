@@ -10,7 +10,7 @@ authRouter.route('/signIn').get((req, res) => {
 
 }).post(passport.authenticate('local', {
     successRedirect: '/auth/profile',
-    failureMessage: '/'
+    failureRedirect: '/'
 }));
 
 
@@ -28,9 +28,6 @@ authRouter.route('/signUp').post((req, res) => {
             const user = { username, password };
             const results = await db.collection('users').insertOne(user);
             debug(results);
-
-            console.log("RESULKTS!!!", results);
-
             req.login(results.ops[0], () => {
                 res.redirect('/auth/profile');
             });
